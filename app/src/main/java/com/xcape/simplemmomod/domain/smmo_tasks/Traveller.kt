@@ -16,7 +16,8 @@ interface Traveller {
         shouldAutoEquip: Boolean = true,
         shouldSkipNPCs: Boolean = false
     ): Long
-    suspend fun upgradeSkill(skillToUpgrade: SkillType = SkillType.DEX): Long
+    // Remover o valor padrão da habilidade
+    suspend fun upgradeSkill(skillToUpgrade: SkillType): Long // Alterado aqui
 
     fun resetEnergyTimer()
 }

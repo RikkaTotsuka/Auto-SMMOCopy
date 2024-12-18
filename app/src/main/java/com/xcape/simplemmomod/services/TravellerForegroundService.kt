@@ -257,7 +257,8 @@ class TravellerForegroundService : LifecycleService(), OnTravellerStateChange {
                                 skillType = state.value.skillToUpgrade
                             )
                         )
-                        traveller.upgradeSkill()
+                        traveller.upgradeSkill(state.value.skillToUpgrade)
+
 
                         onStatusChange(TravellingStatus.Questing)
                         waitTime += traveller.doQuest()
@@ -276,7 +277,7 @@ class TravellerForegroundService : LifecycleService(), OnTravellerStateChange {
                                 skillType = state.value.skillToUpgrade
                             )
                         )
-                        traveller.upgradeSkill()
+                        traveller.upgradeSkill(state.value.skillToUpgrade)
                         traveller.resetEnergyTimer()
                     }
                     else {
@@ -315,7 +316,7 @@ class TravellerForegroundService : LifecycleService(), OnTravellerStateChange {
         lifecycleScope.launch {
             state.collectLatest {
                 val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE)
-                    as NotificationManager
+                        as NotificationManager
 
                 val notificationBuilder = createNotificationBuilder(it.header.toString())
 
@@ -453,7 +454,7 @@ class TravellerForegroundService : LifecycleService(), OnTravellerStateChange {
     }
 
     private fun onStatusChange(status: TravellingStatus)
-        = state.update { it.copy(header = status) }
+            = state.update { it.copy(header = status) }
 
     private fun getNotificationsButtonPendingActivity(button: String): PendingIntent {
         return when(button.lowercase()) {
